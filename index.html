@@ -1,13 +1,103 @@
-
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Meniń birinshi saytım</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Football Game</title>
+
+<style>
+body {
+  background: #087a35;
+  color: white;
+  text-align: center;
+  font-family: Arial;
+}
+h1 { color: yellow; }
+.goal {
+  background: white;
+  color: black;
+  border: 8px solid gray;
+  margin: 20px auto;
+  padding: 30px;
+  max-width: 300px;
+  font-size: 45px;
+}
+button {
+  padding: 15px;
+  margin: 5px;
+  font-size: 18px;
+  border-radius: 10px;
+  border: none;
+  background: yellow;
+}
+#result {
+  font-size: 24px;
+  margin: 20px;
+}
+</style>
 </head>
+
 <body>
-    <h1>Salem dúńya!</h1>
-    <h2>Meniń saytım</h2>
-    <p>Men HTML úyrenip atırman.</p>
-    <button>Bas meni</button>
+
+<h1>⚽ FOOTBALL GAME ⚽</h1>
+<h2>Penalty Shootout</h2>
+
+<div class="goal">
+  🧤<br>
+  ⚽
+</div>
+
+<h2>Score: <span id="score">0</span></h2>
+<h3>Attempts: <span id="shots">0</span>/5</h3>
+
+<p>Choose your shot:</p>
+
+<button onclick="shoot('LEFT')">LEFT</button>
+<button onclick="shoot('CENTER')">CENTER</button>
+<button onclick="shoot('RIGHT')">RIGHT</button>
+
+<div id="result">Let's play!</div>
+
+<button onclick="restart()">RESTART</button>
+
+<script>
+let score = 0;
+let shots = 0;
+
+function shoot(direction) {
+  if (shots >= 5) return;
+
+  let keeper = ['LEFT','CENTER','RIGHT'];
+  let save = keeper[Math.floor(Math.random()*3)];
+
+  shots++;
+
+  if (direction !== save) {
+    score++;
+    document.getElementById("result").innerHTML =
+      "⚽ GOAL! You scored!";
+  } else {
+    document.getElementById("result").innerHTML =
+      "🧤 SAVED! Try again!";
+  }
+
+  document.getElementById("score").innerHTML = score;
+  document.getElementById("shots").innerHTML = shots;
+
+  if (shots === 5) {
+    document.getElementById("result").innerHTML +=
+      "<br>Game Over! Final score: " + score;
+  }
+}
+
+function restart() {
+  score = 0;
+  shots = 0;
+  document.getElementById("score").innerHTML = 0;
+  document.getElementById("shots").innerHTML = 0;
+  document.getElementById("result").innerHTML = "Let's play!";
+}
+</script>
+
 </body>
-</html>
+    </html>
